@@ -1,0 +1,137 @@
+
+main.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <init>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	53                   	push   %ebx
+   4:	83 ec 04             	sub    $0x4,%esp
+   7:	e8 fc ff ff ff       	call   8 <init+0x8>
+   c:	81 c3 02 00 00 00    	add    $0x2,%ebx
+  12:	e8 fc ff ff ff       	call   13 <init+0x13>
+  17:	81 c4 00 00 00 c0    	add    $0xc0000000,%esp
+  1d:	83 ec 0c             	sub    $0xc,%esp
+  20:	8d 83 00 00 00 00    	lea    0x0(%ebx),%eax
+  26:	50                   	push   %eax
+  27:	8d 83 90 00 00 00    	lea    0x90(%ebx),%eax
+  2d:	50                   	push   %eax
+  2e:	6a 25                	push   $0x25
+  30:	8d 83 02 00 00 00    	lea    0x2(%ebx),%eax
+  36:	50                   	push   %eax
+  37:	8d 83 10 00 00 00    	lea    0x10(%ebx),%eax
+  3d:	50                   	push   %eax
+  3e:	e8 fc ff ff ff       	call   3f <init+0x3f>
+  43:	83 c4 20             	add    $0x20,%esp
+  46:	b8 01 00 00 00       	mov    $0x1,%eax
+  4b:	82 8d 83 00 00 00 c0 	orb    $0xc0,0x83(%ebp)
+  52:	ff e0                	jmp    *%eax
+  54:	b8 01 00 00 00       	mov    $0x1,%eax
+  59:	82 90 8b 5d fc c9 c3 	adcb   $0xc3,-0x3603a275(%eax)
+
+00000060 <init_cond>:
+  60:	55                   	push   %ebp
+  61:	89 e5                	mov    %esp,%ebp
+  63:	53                   	push   %ebx
+  64:	83 ec 14             	sub    $0x14,%esp
+  67:	e8 fc ff ff ff       	call   68 <init_cond+0x8>
+  6c:	81 c3 02 00 00 00    	add    $0x2,%ebx
+  72:	e8 fc ff ff ff       	call   73 <init_cond+0x13>
+  77:	8d 83 98 00 00 00    	lea    0x98(%ebx),%eax
+  7d:	50                   	push   %eax
+  7e:	6a 51                	push   $0x51
+  80:	8d 83 02 00 00 00    	lea    0x2(%ebx),%eax
+  86:	50                   	push   %eax
+  87:	8d 83 5c 00 00 00    	lea    0x5c(%ebx),%eax
+  8d:	50                   	push   %eax
+  8e:	e8 fc ff ff ff       	call   8f <init_cond+0x2f>
+  93:	83 c4 10             	add    $0x10,%esp
+  96:	e8 fc ff ff ff       	call   97 <init_cond+0x37>
+  9b:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  9e:	bc 00 00 00 c0       	mov    $0xc0000000,%esp
+  a3:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  a6:	ff d0                	call   *%eax
+  a8:	90                   	nop
+  a9:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  ac:	c9                   	leave  
+  ad:	c3                   	ret    
+
+Disassembly of section .text.__x86.get_pc_thunk.bx:
+
+00000000 <__x86.get_pc_thunk.bx>:
+   0:	8b 1c 24             	mov    (%esp),%ebx
+   3:	c3                   	ret    
+
+main.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <sti>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	e8 fc ff ff ff       	call   4 <sti+0x4>
+   8:	05 01 00 00 00       	add    $0x1,%eax
+   d:	fb                   	sti    
+   e:	90                   	nop
+   f:	5d                   	pop    %ebp
+  10:	c3                   	ret    
+
+00000011 <init>:
+  11:	55                   	push   %ebp
+  12:	89 e5                	mov    %esp,%ebp
+  14:	53                   	push   %ebx
+  15:	83 ec 04             	sub    $0x4,%esp
+  18:	e8 fc ff ff ff       	call   19 <init+0x8>
+  1d:	81 c3 02 00 00 00    	add    $0x2,%ebx
+  23:	e8 fc ff ff ff       	call   24 <init+0x13>
+  28:	81 c4 00 00 00 c0    	add    $0xc0000000,%esp
+  2e:	8d 83 00 00 00 c0    	lea    -0x40000000(%ebx),%eax
+  34:	ff e0                	jmp    *%eax
+  36:	b8 01 00 00 00       	mov    $0x1,%eax
+  3b:	82 90 83 c4 04 5b 5d 	adcb   $0x5d,0x5b04c483(%eax)
+  42:	c3                   	ret    
+
+00000043 <init_cond>:
+  43:	55                   	push   %ebp
+  44:	89 e5                	mov    %esp,%ebp
+  46:	53                   	push   %ebx
+  47:	83 ec 14             	sub    $0x14,%esp
+  4a:	e8 fc ff ff ff       	call   4b <init_cond+0x8>
+  4f:	81 c3 02 00 00 00    	add    $0x2,%ebx
+  55:	e8 fc ff ff ff       	call   56 <init_cond+0x13>
+  5a:	e8 fc ff ff ff       	call   5b <init_cond+0x18>
+  5f:	e8 9c ff ff ff       	call   0 <sti>
+  64:	e8 fc ff ff ff       	call   65 <init_cond+0x22>
+  69:	8d 83 40 00 00 00    	lea    0x40(%ebx),%eax
+  6f:	50                   	push   %eax
+  70:	6a 51                	push   $0x51
+  72:	8d 83 00 00 00 00    	lea    0x0(%ebx),%eax
+  78:	50                   	push   %eax
+  79:	8d 83 0c 00 00 00    	lea    0xc(%ebx),%eax
+  7f:	50                   	push   %eax
+  80:	e8 fc ff ff ff       	call   81 <init_cond+0x3e>
+  85:	83 c4 10             	add    $0x10,%esp
+  88:	e8 fc ff ff ff       	call   89 <init_cond+0x46>
+  8d:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  90:	bc 00 00 00 c0       	mov    $0xc0000000,%esp
+  95:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  98:	ff d0                	call   *%eax
+  9a:	90                   	nop
+  9b:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  9e:	c9                   	leave  
+  9f:	c3                   	ret    
+
+Disassembly of section .text.__x86.get_pc_thunk.ax:
+
+00000000 <__x86.get_pc_thunk.ax>:
+   0:	8b 04 24             	mov    (%esp),%eax
+   3:	c3                   	ret    
+
+Disassembly of section .text.__x86.get_pc_thunk.bx:
+
+00000000 <__x86.get_pc_thunk.bx>:
+   0:	8b 1c 24             	mov    (%esp),%ebx
+   3:	c3                   	ret    

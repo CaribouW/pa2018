@@ -1,0 +1,22 @@
+make[1]: Entering directory '/home/lufangming/pa2018_fall'
+./scripts/update 171250658
+cd nemu && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/nemu'
+make[2]: 'nemu' is up to date.
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/nemu'
+cd testcase && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/testcase'
+gcc -ggdb3 -MMD -MP -Wall -m32 -march=i386 -fno-builtin -fno-stack-protector -I../include -I../libs/newlib/include -c -o src/start.o start.S	
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/testcase'
+cd kernel && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/kernel'
+gcc -m32 -MMD -Wall -Werror -march=i386 -fno-builtin -fno-omit-frame-pointer -fno-stack-protector -I./include -I../include -I../libs/newlib/include   -c -o src/fs/fs.o src/fs/fs.c
+ld -Ttext=0xc0030000 -m elf_i386  -e start -o kernel start/start.o ./src/irq/do_irq.o ./src/fs/fs.o ./src/main.o ./src/memory/kvm.o ./src/memory/vmem.o ./src/memory/mm.o ./src/elf/elf.o ./src/driver/ide/dma.o ./src/driver/ide/ide.o ./src/driver/ide/disk.o ./src/driver/ide/cache.o ./src/irq/i8259.o ./src/irq/irq_handle.o ./src/irq/idt.o ./src/syscall/do_syscall.o ./src/lib/serial.o ./src/lib/misc.o ./src/lib/printk.o src/memory/mm_malloc.o  ../libs/newlib/libc.a
+#objcopy -S -O binary --set-start 0x0 kernel kernel.img
+objcopy -S -O binary kernel kernel.img
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/kernel'
+cd game && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/game'
+make[2]: 'game' is up to date.
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/game'
+make[1]: Leaving directory '/home/lufangming/pa2018_fall'

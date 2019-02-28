@@ -1,0 +1,90 @@
+./scripts/update 171250658
+scripts/make_emotion.sh
+session_name_
+[exited]
+cat make.log
+make[1]: Entering directory '/home/lufangming/pa2018_fall'
+./scripts/update 171250658
+cd nemu && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/nemu'
+gcc -ggdb3 -MMD -MP -Wall -Werror -O2 -I./include -I../include -I../libs -I../libs/nemu-ref/include   -c -o src/cpu/instr/decode/opcode.o src/cpu/instr/decode/opcode.c
+gcc -o nemu src/device/io/mm_io.o src/device/io/port_io.o src/device/dev/vga.o src/device/dev/audio.o src/device/dev/serial.o src/device/dev/ide.o src/device/dev/vga-palette.o src/device/dev/keyboard.o src/device/dev/timer.o src/device/sdl.o src/device/i8259_pic.o src/main.o src/memory/memory.o src/memory/mmu/page.o src/memory/mmu/tlb.o src/memory/mmu/segment.o src/parse_args.o src/monitor/elf.o src/monitor/expr.o src/monitor/breakpoint.o src/monitor/ui.o src/cpu/test/alu_test.o src/cpu/test/fpu_test.o src/cpu/intr.o src/cpu/cpu.o src/cpu/reg.o src/cpu/instr/shl.o src/cpu/instr/int.o src/cpu/instr/div.o src/cpu/instr/inc.o src/cpu/instr/stos.o src/cpu/instr/data_size.o src/cpu/instr/lea.o src/cpu/instr/not.o src/cpu/instr/x87.o src/cpu/instr/sbb.o src/cpu/instr/rol.o src/cpu/instr/idiv.o src/cpu/instr/leave.o src/cpu/instr/group.o src/cpu/instr/rcr.o src/cpu/instr/cltd.o src/cpu/instr/cmov.o src/cpu/instr/test.o src/cpu/instr/mov.o src/cpu/instr/add.o src/cpu/instr/bt.o src/cpu/instr/flags.o src/cpu/instr/pop.o src/cpu/instr/cmp.o src/cpu/instr/ror.o src/cpu/instr/push.o src/cpu/instr/jmp.o src/cpu/instr/neg.o src/cpu/instr/opcode_2_byte.o src/cpu/instr/jcc.o src/cpu/instr/imul.o src/cpu/instr/ret.o src/cpu/instr/xor.o src/cpu/instr/nemu_trap.o src/cpu/instr/mul.o src/cpu/instr/and.o src/cpu/instr/dec.o src/cpu/instr/hlt.o src/cpu/instr/adc.o src/cpu/instr/in.o src/cpu/instr/or.o src/cpu/instr/sub.o src/cpu/instr/xchg.o src/cpu/instr/call.o src/cpu/instr/inv.o src/cpu/instr/nop.o src/cpu/instr/decode/debug.o src/cpu/instr/decode/modrm.o src/cpu/instr/decode/operand.o src/cpu/instr/decode/opcode_ref.o src/cpu/instr/decode/opcode.o src/cpu/instr/decode/sib.o src/cpu/instr/movs.o src/cpu/instr/rcl.o src/cpu/instr/cmps.o src/cpu/instr/shr.o src/cpu/instr/cbw.o src/cpu/instr/setcc.o src/cpu/instr/rep_repe.o src/cpu/instr/sar.o src/cpu/alu.o src/cpu/fpu.o src/cpu/eflag.o ../libs/nemu-ref/lib-nemu-ref.a -lreadline -lSDL
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/nemu'
+cd testcase && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/testcase'
+gcc -ggdb3 -MMD -MP -Wall -m32 -march=i386 -fno-builtin -fno-stack-protector -I../include -I../libs/newlib/include -c -o src/start.o start.S	
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/testcase'
+cd kernel && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/kernel'
+make[2]: 'kernel' is up to date.
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/kernel'
+cd game && make
+make[2]: Entering directory '/home/lufangming/pa2018_fall/game'
+make[2]: 'game' is up to date.
+make[2]: Leaving directory '/home/lufangming/pa2018_fall/game'
+make[1]: Leaving directory '/home/lufangming/pa2018_fall'
+./nemu/nemu --testcase add
+NEMU load and execute img: [1m[32m./testcase/bin/add.img[0m  elf: [1m[36m./testcase/bin/add[0m
+(nemu) si 30
+00030000:   e9 00                                     jmp $0x0
+00030005:   55                                        push %ebp
+00030006:   89 e5                                     movl %esp, %ebp
+00030008:   53                                        push %ebx
+00030009:   83 ec 10                                  subl $0x10, %esp
+0003009b:   c4 10 5b 5d c3                            call
+000300a0:   8b 14 24                                  movl (%esp), %edx
+00030011:   81                                        ret
+00030011:   81 c2 ef 1f 00 00                         addl $0x1fef, %edx
+00030017:   c7 45 f0 00 00 00 00                      movl $0x0, -0x10(%ebp)
+0003001e:   c7 45 f8 00 00 00 00                      movl $0x0, -0x8(%ebp)
+00030025:   eb 48                                     jmp $0x48
+0003006f:   8b 45 f8                                  movl -0x8(%ebp), %eax
+00030072:   83 f8 07                                  cmpl $0x7, %eax
+00030075:   76 b0                                     jna $0xb0
+00030027:   c7 45 f4 00 00 00 00                      movl $0x0, -0xc(%ebp)
+0003002e:   eb 34                                     jmp $0x34
+00030064:   8b 45 f4                                  movl -0xc(%ebp), %eax
+00030067:   83 f8 07                                  cmpl $0x7, %eax
+0003006a:   76 c4                                     jna $0xc4
+00030030:   8b 45 f8                                  movl -0x8(%ebp), %eax
+00030033:   8b 8c 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %ecx
+0003003a:   8b 45 f4                                  movl -0xc(%ebp), %eax
+0003003d:   8b 84 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %eax
+00030044:   8d 1c 01                                  lea (%ecx,%eax,1), %ebx
+00030047:   8b 45 f0                                  movl -0x10(%ebp), %eax
+0003004a:   8d 48 01                                  lea 0x1(%eax), %ecx
+0003004d:   89 4d f0                                  movl %ecx, -0x10(%ebp)
+00030050:   8b 84 82 40 00 00 00                      movl 0x40(%edx,%eax,4), %eax
+00030057:   39 c3                                     cmpl %eax, %ebx
+(nemu) si 30
+00030059:   74 06                                     je $0x6
+00030064:   8b 45 f4                                  movl -0xc(%ebp), %eax
+00030067:   83 f8 07                                  cmpl $0x7, %eax
+0003006a:   76 c4                                     jna $0xc4
+00030030:   8b 45 f8                                  movl -0x8(%ebp), %eax
+00030033:   8b 8c 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %ecx
+0003003a:   8b 45 f4                                  movl -0xc(%ebp), %eax
+0003003d:   8b 84 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %eax
+00030044:   8d 1c 01                                  lea (%ecx,%eax,1), %ebx
+00030047:   8b 45 f0                                  movl -0x10(%ebp), %eax
+0003004a:   8d 48 01                                  lea 0x1(%eax), %ecx
+0003004d:   89 4d f0                                  movl %ecx, -0x10(%ebp)
+00030050:   8b 84 82 40 00 00 00                      movl 0x40(%edx,%eax,4), %eax
+00030057:   39 c3                                     cmpl %eax, %ebx
+00030059:   74 06                                     je $0x6
+00030064:   8b 45 f4                                  movl -0xc(%ebp), %eax
+00030067:   83 f8 07                                  cmpl $0x7, %eax
+0003006a:   76 c4                                     jna $0xc4
+00030030:   8b 45 f8                                  movl -0x8(%ebp), %eax
+00030033:   8b 8c 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %ecx
+0003003a:   8b 45 f4                                  movl -0xc(%ebp), %eax
+0003003d:   8b 84 82 20 00 00 00                      movl 0x20(%edx,%eax,4), %eax
+00030044:   8d 1c 01                                  lea (%ecx,%eax,1), %ebx
+00030047:   8b 45 f0                                  movl -0x10(%ebp), %eax
+0003004a:   8d 48 01                                  lea 0x1(%eax), %ecx
+0003004d:   89 4d f0                                  movl %ecx, -0x10(%ebp)
+00030050:   8b 84 82 40 00 00 00                      movl 0x40(%edx,%eax,4), %eax
+00030057:   39 c3                                     cmpl %eax, %ebx
+(nemu) c
+nemu: HIT [0;32mGOOD[0m TRAP at eip = 0x00030094
+NEMU2 terminated
