@@ -1,0 +1,236 @@
+#include "cpu/cpu.h"
+/*
+0xFFFFFFFF>>(32-data_size) means that we create the number that 
+has (data_size) numbers of '1' in the lower bits.
+
+we use & operation to get the lower bits of the result;
+*/
+
+/**
+*  Get the Zero flag.
+*/
+void set_ZF(uint32_t result, size_t data_size){
+	result = result & (0xFFFFFFFF >> (32 - data_size));
+	cpu.eflags.ZF = (result == 0);
+}
+/**
+ * Get the sign flag
+ * 
+*/
+void set_SF(uint32_t result, size_t data_size){
+	result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	cpu.eflags.SF = sign(result);
+}
+
+void set_PF(uint32_t result){
+	int i = 0;
+	int sum = 0;
+	for(i = 0; i < 8; i++){
+		sum += result & 1;
+		result = result >> 1;  //move rightWard.
+	}
+	cpu.eflags.PF = (sum % 2 == 0);
+}
+void set_CF_add(uint32_t result, uint32_t src, size_t data_size){
+	result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size);//符号拓展
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	cpu.eflags.CF = result < src;//since the operator is int32_t , So 
+}
+
+void set_OF_add(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
+	switch(data_size){
+		case 8 :
+			result = sign_ext(result & 0xFF, 8);
+			src = sign_ext(src & 0xFF, 8);
+			dest = sign_ext(dest & 0xFF, 8);
+			break;
+		case 16:
+			result = sign_ext(result & 0xFFFF, 16);
+			src = sign_ext(src & 0xFFFF, 16);
+			dest = sign_ext(dest & 0xFFFF, 16);
+			break;
+		default:break;
+	}
+	if(sign(src) == sign(dest)){  //overflow only occur when the sign is the same.
+		if(sign(src) != sign(result))
+			cpu.eflags.OF = 1;
+		else
+			cpu.eflags.OF = 0;
+	}else{
+		cpu.eflags.OF = 0;
+	}
+}
+
+void set_OF_adc(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
+	//和add没有区别？
+	switch(data_size){
+		case 8 :
+			result = sign_ext(result & 0xFF, 8);
+			src = sign_ext(src & 0xFF, 8);
+			dest = sign_ext(dest & 0xFF, 8);
+			break;
+		case 16:
+			result = sign_ext(result & 0xFFFF, 16);
+			src = sign_ext(src & 0xFFFF, 16);
+			dest = sign_ext(dest & 0xFFFF, 16);
+			break;
+		default:break;
+	}
+	if(sign(src) == sign(dest)){
+		if(sign(src) != sign(result))
+			cpu.eflags.OF = 1;
+		else
+			cpu.eflags.OF = 0;
+	}else{
+		cpu.eflags.OF = 0;
+	}
+}
+
+void set_CF_adc(uint32_t result, uint32_t src, size_t data_size){
+	result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size);//符号拓展
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	//和add的区别在这里。当cf为1的时候
+	if(cpu.eflags.CF == 0){
+		cpu.eflags.CF = result < src;
+	}else{
+		cpu.eflags.CF = result <= src;
+	}
+}
+
+void set_OF_sub(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
+	switch(data_size){
+		case 8 :
+			result = sign_ext(result & 0xFF, 8);
+			src = sign_ext(src & 0xFF, 8);
+			dest = sign_ext(dest & 0xFF, 8);
+			break;
+		case 16:
+			result = sign_ext(result & 0xFFFF, 16);
+			src = sign_ext(src & 0xFFFF, 16);
+			dest = sign_ext(dest & 0xFFFF, 16);
+			break;
+		default:break;
+	}
+	if(sign(src) != sign(dest)){
+		if(sign(dest) != sign(result))//被减数与结果符号不同时发生溢出
+			cpu.eflags.OF = 1;
+		else
+			cpu.eflags.OF = 0;
+	}else{
+		cpu.eflags.OF = 0;
+	
+	}
+}
+
+void set_CF_sub(uint32_t src, uint32_t dest, size_t data_size){
+	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);//符号拓展
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	cpu.eflags.CF = dest < src;
+}
+
+void set_OF_sbb(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
+	switch(data_size){
+		case 8 :
+			result = sign_ext(result & 0xFF, 8);//这一句的意义是什么
+			src = sign_ext(src & 0xFF, 8);
+			dest = sign_ext(dest & 0xFF, 8);
+			break;
+		case 16:
+			result = sign_ext(result & 0xFFFF, 16);
+			src = sign_ext(src & 0xFFFF, 16);
+			dest = sign_ext(dest & 0xFFFF, 16);
+			break;
+		default:break;
+	}
+	if(sign(src) != sign(dest)){
+		if(sign(dest) != sign(result))//被减数与结果符号不同时发生溢出
+			cpu.eflags.OF = 1;
+		else
+			cpu.eflags.OF = 0;
+	}else{
+		cpu.eflags.OF = 0;
+	}
+}
+
+void set_CF_sbb(uint32_t src, uint32_t dest, size_t data_size){
+	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);//符号拓展
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	if(cpu.eflags.CF == 0){
+		cpu.eflags.CF = dest < src;
+	}else{
+		cpu.eflags.CF = dest <= src;
+	}
+}
+
+void set_OF_mul(uint64_t result, uint64_t src, uint64_t dest, size_t data_size){
+	uint64_t result32 = result & (0xFFFFFFFF >> (32 - data_size));
+	cpu.eflags.CF = (result32 < result);
+	cpu.eflags.OF = (result32 < result);
+
+	/*
+	printf("result = %llu, src = %llu, dest = %llu\n", result, src, dest);
+	src = src & (0xFFFFFFFF >> (32 - data_size));
+	dest = dest & (0xFFFFFFFF >> (32 - data_size));
+	result = result & (0xFFFFFFFF >> (32 - data_size));
+	printf("result = %llu, src = %llu, dest = %llu\n", result, src, dest);
+	cpu.eflags.CF = (result < src || result < dest);
+	cpu.eflags.OF = (result < src || result < dest);
+	if(src == 0 || dest == 0){
+		printf("haha\n");
+		cpu.eflags.CF = 0;
+		cpu.eflags.OF = 0;
+	}
+	*/
+
+	/*
+	switch(data_size){
+		case 8 :
+			result = sign_ext_64(result & 0xFF, 8);//这一句的意义是什么
+			src = sign_ext_64(src & 0xFF, 8);
+			dest = sign_ext_64(dest & 0xFF, 8);
+			break;
+		case 16:
+			result = sign_ext_64(result & 0xFFFF, 16);
+			src = sign_ext_64(src & 0xFFFF, 16);
+			dest = sign_ext_64(dest & 0xFFFF, 16);
+			break;
+		default:break;
+	}
+	*/
+	/*
+	if(sign(src) == sign(dest)){
+		if(sign(result) != 1){
+			printf("CF = 1, sign(src) = %d, sign(dest) = %d, sign(result) = %d", sign(src), sign(dest), sign(result));
+			cpu.eflags.OF = 1;
+			cpu.eflags.CF = 1;
+		}else{	printf("CF = 0, sign(src) = %d, sign(dest) = %d, sign(result) = %d", sign(src), sign(dest), sign(result));
+
+			cpu.eflags.OF = 0;
+			cpu.eflags.CF = 0;
+		}
+	}else{
+		if(sign(result) != 0){
+				printf("CF = 0, sign(src) = %d, sign(dest) = %d, sign(result) = %d", sign(src), sign(dest), sign(result));
+			cpu.eflags.OF = 0;
+			cpu.eflags.CF = 0;
+		}else{
+				printf("CF = 1, sign(src) = %d, sign(dest) = %d, sign(result) = %d", sign(src), sign(dest), sign(result));
+cpu.eflags.OF = 1;
+			cpu.eflags.CF = 1;
+		}
+	}
+	if(src == 0 || dest == 0){
+		cpu.eflags.CF = 0;
+		cpu.eflags.OF = 0;
+	}
+	*/
+
+}
+
+void set_CF_shl(uint32_t dest, uint32_t src, size_t data_size){
+	cpu.eflags.CF = (dest >> (data_size - src)) & 1;
+}
+
+void set_CF_shr(uint32_t dest, uint32_t src, size_t data_size){
+	cpu.eflags.CF = (dest >> (src - 1)) & 1;
+}

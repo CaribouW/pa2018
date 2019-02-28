@@ -1,0 +1,138 @@
+
+00030000 <start>:
+   30000:	e9 e7 00 00 00       	jmp    300ec <main>
+
+00030005 <in_byte>:
+   30005:	55                   	push   %ebp
+   30006:	89 e5                	mov    %esp,%ebp
+   30008:	83 ec 14             	sub    $0x14,%esp
+   3000b:	e8 3a 01 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   30010:	05 f0 1f 00 00       	add    $0x1ff0,%eax
+   30015:	8b 45 08             	mov    0x8(%ebp),%eax
+   30018:	66 89 45 ec          	mov    %ax,-0x14(%ebp)
+   3001c:	8b 45 ec             	mov    -0x14(%ebp),%eax
+   3001f:	89 c2                	mov    %eax,%edx
+   30021:	ec                   	in     (%dx),%al
+   30022:	88 45 ff             	mov    %al,-0x1(%ebp)
+   30025:	8a 45 ff             	mov    -0x1(%ebp),%al
+   30028:	c9                   	leave  
+   30029:	c3                   	ret    
+
+0003002a <add_irq_handler>:
+   3002a:	55                   	push   %ebp
+   3002b:	89 e5                	mov    %esp,%ebp
+   3002d:	53                   	push   %ebx
+   3002e:	e8 17 01 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   30033:	05 cd 1f 00 00       	add    $0x1fcd,%eax
+   30038:	b8 00 00 00 00       	mov    $0x0,%eax
+   3003d:	8b 55 08             	mov    0x8(%ebp),%edx
+   30040:	8b 4d 0c             	mov    0xc(%ebp),%ecx
+   30043:	89 d3                	mov    %edx,%ebx
+   30045:	cd 80                	int    $0x80
+   30047:	90                   	nop
+   30048:	5b                   	pop    %ebx
+   30049:	5d                   	pop    %ebp
+   3004a:	c3                   	ret    
+
+0003004b <writec>:
+   3004b:	55                   	push   %ebp
+   3004c:	89 e5                	mov    %esp,%ebp
+   3004e:	53                   	push   %ebx
+   3004f:	83 ec 04             	sub    $0x4,%esp
+   30052:	e8 f3 00 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   30057:	05 a9 1f 00 00       	add    $0x1fa9,%eax
+   3005c:	8b 45 0c             	mov    0xc(%ebp),%eax
+   3005f:	88 45 f8             	mov    %al,-0x8(%ebp)
+   30062:	b8 04 00 00 00       	mov    $0x4,%eax
+   30067:	8b 5d 08             	mov    0x8(%ebp),%ebx
+   3006a:	8d 4d f8             	lea    -0x8(%ebp),%ecx
+   3006d:	ba 01 00 00 00       	mov    $0x1,%edx
+   30072:	cd 80                	int    $0x80
+   30074:	90                   	nop
+   30075:	83 c4 04             	add    $0x4,%esp
+   30078:	5b                   	pop    %ebx
+   30079:	5d                   	pop    %ebp
+   3007a:	c3                   	ret    
+
+0003007b <printc>:
+   3007b:	55                   	push   %ebp
+   3007c:	89 e5                	mov    %esp,%ebp
+   3007e:	83 ec 04             	sub    $0x4,%esp
+   30081:	e8 c4 00 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   30086:	05 7a 1f 00 00       	add    $0x1f7a,%eax
+   3008b:	8b 45 08             	mov    0x8(%ebp),%eax
+   3008e:	88 45 fc             	mov    %al,-0x4(%ebp)
+   30091:	0f be 45 fc          	movsbl -0x4(%ebp),%eax
+   30095:	50                   	push   %eax
+   30096:	6a 01                	push   $0x1
+   30098:	e8 ae ff ff ff       	call   3004b <writec>
+   3009d:	83 c4 08             	add    $0x8,%esp
+   300a0:	90                   	nop
+   300a1:	c9                   	leave  
+   300a2:	c3                   	ret    
+
+000300a3 <keyboard_event_handler>:
+   300a3:	55                   	push   %ebp
+   300a4:	89 e5                	mov    %esp,%ebp
+   300a6:	83 ec 18             	sub    $0x18,%esp
+   300a9:	e8 9c 00 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   300ae:	05 52 1f 00 00       	add    $0x1f52,%eax
+   300b3:	6a 60                	push   $0x60
+   300b5:	e8 4b ff ff ff       	call   30005 <in_byte>
+   300ba:	83 c4 04             	add    $0x4,%esp
+   300bd:	88 45 f7             	mov    %al,-0x9(%ebp)
+   300c0:	0f b6 45 f7          	movzbl -0x9(%ebp),%eax
+   300c4:	83 ec 0c             	sub    $0xc,%esp
+   300c7:	50                   	push   %eax
+   300c8:	e8 40 00 00 00       	call   3010d <translate_key>
+   300cd:	83 c4 10             	add    $0x10,%esp
+   300d0:	88 45 f6             	mov    %al,-0xa(%ebp)
+   300d3:	80 7d f6 00          	cmpb   $0x0,-0xa(%ebp)
+   300d7:	7e 10                	jle    300e9 <keyboard_event_handler+0x46>
+   300d9:	0f be 45 f6          	movsbl -0xa(%ebp),%eax
+   300dd:	83 ec 0c             	sub    $0xc,%esp
+   300e0:	50                   	push   %eax
+   300e1:	e8 95 ff ff ff       	call   3007b <printc>
+   300e6:	83 c4 10             	add    $0x10,%esp
+   300e9:	90                   	nop
+   300ea:	c9                   	leave  
+   300eb:	c3                   	ret    
+
+000300ec <main>:
+   300ec:	55                   	push   %ebp
+   300ed:	89 e5                	mov    %esp,%ebp
+   300ef:	e8 56 00 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   300f4:	05 0c 1f 00 00       	add    $0x1f0c,%eax
+   300f9:	8d 80 a3 e0 ff ff    	lea    -0x1f5d(%eax),%eax
+   300ff:	50                   	push   %eax
+   30100:	6a 01                	push   $0x1
+   30102:	e8 23 ff ff ff       	call   3002a <add_irq_handler>
+   30107:	83 c4 08             	add    $0x8,%esp
+   3010a:	f4                   	hlt    
+   3010b:	eb fd                	jmp    3010a <main+0x1e>
+
+0003010d <translate_key>:
+   3010d:	55                   	push   %ebp
+   3010e:	89 e5                	mov    %esp,%ebp
+   30110:	83 ec 10             	sub    $0x10,%esp
+   30113:	e8 32 00 00 00       	call   3014a <__x86.get_pc_thunk.ax>
+   30118:	05 e8 1e 00 00       	add    $0x1ee8,%eax
+   3011d:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+   30124:	eb 1a                	jmp    30140 <translate_key+0x33>
+   30126:	8b 55 fc             	mov    -0x4(%ebp),%edx
+   30129:	8b 94 90 20 00 00 00 	mov    0x20(%eax,%edx,4),%edx
+   30130:	3b 55 08             	cmp    0x8(%ebp),%edx
+   30133:	75 08                	jne    3013d <translate_key+0x30>
+   30135:	8b 45 fc             	mov    -0x4(%ebp),%eax
+   30138:	83 c0 41             	add    $0x41,%eax
+   3013b:	eb 0b                	jmp    30148 <translate_key+0x3b>
+   3013d:	ff 45 fc             	incl   -0x4(%ebp)
+   30140:	83 7d fc 19          	cmpl   $0x19,-0x4(%ebp)
+   30144:	7e e0                	jle    30126 <translate_key+0x19>
+   30146:	b0 00                	mov    $0x0,%al
+   30148:	c9                   	leave  
+   30149:	c3                   	ret    
+
+0003014a <__x86.get_pc_thunk.ax>:
+   3014a:	8b 04 24             	mov    (%esp),%eax
+   3014d:	c3                   	ret    

@@ -1,0 +1,510 @@
+   363f9:	8b 41 0c             	mov    0xc(%ecx),%eax
+   363fc:	8b 51 08             	mov    0x8(%ecx),%edx
+   363ff:	89 42 0c             	mov    %eax,0xc(%edx)
+   36402:	89 50 08             	mov    %edx,0x8(%eax)
+   36405:	0f 87 85 03 00 00    	ja     36790 <_realloc_r+0x490>
+   3640b:	83 fb 13             	cmp    $0x13,%ebx
+   3640e:	89 f0                	mov    %esi,%eax
+   36410:	76 1a                	jbe    3642c <_realloc_r+0x12c>
+   36412:	8b 07                	mov    (%edi),%eax
+   36414:	83 fb 1b             	cmp    $0x1b,%ebx
+   36417:	89 41 08             	mov    %eax,0x8(%ecx)
+   3641a:	8b 47 04             	mov    0x4(%edi),%eax
+   3641d:	89 41 0c             	mov    %eax,0xc(%ecx)
+   36420:	0f 87 8f 03 00 00    	ja     367b5 <_realloc_r+0x4b5>
+   36426:	8d 41 10             	lea    0x10(%ecx),%eax
+   36429:	83 c7 08             	add    $0x8,%edi
+   3642c:	8b 17                	mov    (%edi),%edx
+   3642e:	8b 5d d0             	mov    -0x30(%ebp),%ebx
+   36431:	89 10                	mov    %edx,(%eax)
+   36433:	8b 57 04             	mov    0x4(%edi),%edx
+   36436:	89 50 04             	mov    %edx,0x4(%eax)
+   36439:	8b 57 08             	mov    0x8(%edi),%edx
+   3643c:	89 f7                	mov    %esi,%edi
+   3643e:	89 ce                	mov    %ecx,%esi
+   36440:	89 50 08             	mov    %edx,0x8(%eax)
+   36443:	8b 41 04             	mov    0x4(%ecx),%eax
+   36446:	eb 1b                	jmp    36463 <_realloc_r+0x163>
+   36448:	83 e2 f8             	and    $0xfffffff8,%edx
+   3644b:	89 55 dc             	mov    %edx,-0x24(%ebp)
+   3644e:	89 55 d8             	mov    %edx,-0x28(%ebp)
+   36451:	c1 ea 1f             	shr    $0x1f,%edx
+   36454:	e9 ff fe ff ff       	jmp    36358 <_realloc_r+0x58>
+   36459:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
+   36460:	8b 45 d4             	mov    -0x2c(%ebp),%eax
+   36463:	89 da                	mov    %ebx,%edx
+   36465:	2b 55 dc             	sub    -0x24(%ebp),%edx
+   36468:	83 fa 0f             	cmp    $0xf,%edx
+   3646b:	77 4b                	ja     364b8 <_realloc_r+0x1b8>
+   3646d:	83 e0 01             	and    $0x1,%eax
+   36470:	09 d8                	or     %ebx,%eax
+   36472:	89 46 04             	mov    %eax,0x4(%esi)
+   36475:	83 4c 1e 04 01       	orl    $0x1,0x4(%esi,%ebx,1)
+   3647a:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   3647d:	89 04 24             	mov    %eax,(%esp)
+   36480:	e8 1b da ff ff       	call   33ea0 <__malloc_unlock>
+   36485:	89 f8                	mov    %edi,%eax
+   36487:	83 c4 3c             	add    $0x3c,%esp
+   3648a:	5b                   	pop    %ebx
+   3648b:	5e                   	pop    %esi
+   3648c:	5f                   	pop    %edi
+   3648d:	5d                   	pop    %ebp
+   3648e:	c3                   	ret    
+   3648f:	90                   	nop
+   36490:	83 e1 fc             	and    $0xfffffffc,%ecx
+   36493:	89 4d d0             	mov    %ecx,-0x30(%ebp)
+   36496:	01 d9                	add    %ebx,%ecx
+   36498:	3b 4d d8             	cmp    -0x28(%ebp),%ecx
+   3649b:	0f 8c 04 ff ff ff    	jl     363a5 <_realloc_r+0xa5>
+   364a1:	8b 5a 0c             	mov    0xc(%edx),%ebx
+   364a4:	8b 52 08             	mov    0x8(%edx),%edx
+   364a7:	8b 45 d4             	mov    -0x2c(%ebp),%eax
+   364aa:	89 5a 0c             	mov    %ebx,0xc(%edx)
+   364ad:	89 53 08             	mov    %edx,0x8(%ebx)
+   364b0:	89 cb                	mov    %ecx,%ebx
+   364b2:	eb af                	jmp    36463 <_realloc_r+0x163>
+   364b4:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
+   364b8:	8b 5d dc             	mov    -0x24(%ebp),%ebx
+   364bb:	83 e0 01             	and    $0x1,%eax
+   364be:	09 d8                	or     %ebx,%eax
+   364c0:	89 46 04             	mov    %eax,0x4(%esi)
+   364c3:	89 d0                	mov    %edx,%eax
+   364c5:	8d 0c 1e             	lea    (%esi,%ebx,1),%ecx
+   364c8:	83 c8 01             	or     $0x1,%eax
+   364cb:	89 41 04             	mov    %eax,0x4(%ecx)
+   364ce:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   364d1:	83 4c 11 04 01       	orl    $0x1,0x4(%ecx,%edx,1)
+   364d6:	83 c1 08             	add    $0x8,%ecx
+   364d9:	89 4c 24 04          	mov    %ecx,0x4(%esp)
+   364dd:	89 04 24             	mov    %eax,(%esp)
+   364e0:	e8 9b fa ff ff       	call   35f80 <_free_r>
+   364e5:	eb 93                	jmp    3647a <_realloc_r+0x17a>
+   364e7:	90                   	nop
+   364e8:	8b 45 e0             	mov    -0x20(%ebp),%eax
+   364eb:	89 44 24 04          	mov    %eax,0x4(%esp)
+   364ef:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   364f2:	89 04 24             	mov    %eax,(%esp)
+   364f5:	e8 76 d1 ff ff       	call   33670 <_malloc_r>
+   364fa:	85 c0                	test   %eax,%eax
+   364fc:	89 c1                	mov    %eax,%ecx
+   364fe:	0f 84 65 03 00 00    	je     36869 <_realloc_r+0x569>
+   36504:	8b 47 fc             	mov    -0x4(%edi),%eax
+   36507:	8d 51 f8             	lea    -0x8(%ecx),%edx
+   3650a:	89 55 e0             	mov    %edx,-0x20(%ebp)
+   3650d:	89 c2                	mov    %eax,%edx
+   3650f:	83 e2 fe             	and    $0xfffffffe,%edx
+   36512:	01 f2                	add    %esi,%edx
+   36514:	39 55 e0             	cmp    %edx,-0x20(%ebp)
+   36517:	0f 84 63 02 00 00    	je     36780 <_realloc_r+0x480>
+   3651d:	83 eb 04             	sub    $0x4,%ebx
+   36520:	83 fb 24             	cmp    $0x24,%ebx
+   36523:	0f 87 6f 01 00 00    	ja     36698 <_realloc_r+0x398>
+   36529:	83 fb 13             	cmp    $0x13,%ebx
+   3652c:	0f 87 ee 00 00 00    	ja     36620 <_realloc_r+0x320>
+   36532:	89 c8                	mov    %ecx,%eax
+   36534:	89 fa                	mov    %edi,%edx
+   36536:	8b 1a                	mov    (%edx),%ebx
+   36538:	89 18                	mov    %ebx,(%eax)
+   3653a:	8b 5a 04             	mov    0x4(%edx),%ebx
+   3653d:	89 58 04             	mov    %ebx,0x4(%eax)
+   36540:	8b 52 08             	mov    0x8(%edx),%edx
+   36543:	89 50 08             	mov    %edx,0x8(%eax)
+   36546:	8b 75 e4             	mov    -0x1c(%ebp),%esi
+   36549:	89 7c 24 04          	mov    %edi,0x4(%esp)
+   3654d:	89 4d e0             	mov    %ecx,-0x20(%ebp)
+   36550:	89 34 24             	mov    %esi,(%esp)
+   36553:	e8 28 fa ff ff       	call   35f80 <_free_r>
+   36558:	89 34 24             	mov    %esi,(%esp)
+   3655b:	e8 40 d9 ff ff       	call   33ea0 <__malloc_unlock>
+   36560:	8b 4d e0             	mov    -0x20(%ebp),%ecx
+   36563:	83 c4 3c             	add    $0x3c,%esp
+   36566:	5b                   	pop    %ebx
+   36567:	5e                   	pop    %esi
+   36568:	5f                   	pop    %edi
+   36569:	89 c8                	mov    %ecx,%eax
+   3656b:	5d                   	pop    %ebp
+   3656c:	c3                   	ret    
+   3656d:	8d 76 00             	lea    0x0(%esi),%esi
+   36570:	89 45 0c             	mov    %eax,0xc(%ebp)
+   36573:	83 c4 3c             	add    $0x3c,%esp
+   36576:	5b                   	pop    %ebx
+   36577:	5e                   	pop    %esi
+   36578:	5f                   	pop    %edi
+   36579:	5d                   	pop    %ebp
+   3657a:	e9 f1 d0 ff ff       	jmp    33670 <_malloc_r>
+   3657f:	90                   	nop
+   36580:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   36583:	c7 00 0c 00 00 00    	movl   $0xc,(%eax)
+   36589:	31 c0                	xor    %eax,%eax
+   3658b:	e9 f7 fe ff ff       	jmp    36487 <_realloc_r+0x187>
+   36590:	89 c2                	mov    %eax,%edx
+   36592:	3b 55 d8             	cmp    -0x28(%ebp),%edx
+   36595:	0f 8c 4d ff ff ff    	jl     364e8 <_realloc_r+0x1e8>
+   3659b:	8b 71 08             	mov    0x8(%ecx),%esi
+   3659e:	83 eb 04             	sub    $0x4,%ebx
+   365a1:	8b 41 0c             	mov    0xc(%ecx),%eax
+   365a4:	83 fb 24             	cmp    $0x24,%ebx
+   365a7:	89 46 0c             	mov    %eax,0xc(%esi)
+   365aa:	89 70 08             	mov    %esi,0x8(%eax)
+   365ad:	8d 71 08             	lea    0x8(%ecx),%esi
+   365b0:	0f 87 88 00 00 00    	ja     3663e <_realloc_r+0x33e>
+   365b6:	83 fb 13             	cmp    $0x13,%ebx
+   365b9:	89 f0                	mov    %esi,%eax
+   365bb:	76 1a                	jbe    365d7 <_realloc_r+0x2d7>
+   365bd:	8b 07                	mov    (%edi),%eax
+   365bf:	83 fb 1b             	cmp    $0x1b,%ebx
+   365c2:	89 41 08             	mov    %eax,0x8(%ecx)
+   365c5:	8b 47 04             	mov    0x4(%edi),%eax
+   365c8:	89 41 0c             	mov    %eax,0xc(%ecx)
+   365cb:	0f 87 17 02 00 00    	ja     367e8 <_realloc_r+0x4e8>
+   365d1:	8d 41 10             	lea    0x10(%ecx),%eax
+   365d4:	83 c7 08             	add    $0x8,%edi
+   365d7:	8b 1f                	mov    (%edi),%ebx
+   365d9:	89 18                	mov    %ebx,(%eax)
+   365db:	8b 5f 04             	mov    0x4(%edi),%ebx
+   365de:	89 58 04             	mov    %ebx,0x4(%eax)
+   365e1:	8b 5f 08             	mov    0x8(%edi),%ebx
+   365e4:	89 f7                	mov    %esi,%edi
+   365e6:	89 ce                	mov    %ecx,%esi
+   365e8:	89 58 08             	mov    %ebx,0x8(%eax)
+   365eb:	89 d3                	mov    %edx,%ebx
+   365ed:	8b 41 04             	mov    0x4(%ecx),%eax
+   365f0:	e9 6e fe ff ff       	jmp    36463 <_realloc_r+0x163>
+   365f5:	8d 76 00             	lea    0x0(%esi),%esi
+   365f8:	8b 45 cc             	mov    -0x34(%ebp),%eax
+   365fb:	8b 55 dc             	mov    -0x24(%ebp),%edx
+   365fe:	8b 48 04             	mov    0x4(%eax),%ecx
+   36601:	83 c2 10             	add    $0x10,%edx
+   36604:	89 4d d0             	mov    %ecx,-0x30(%ebp)
+   36607:	83 65 d0 fc          	andl   $0xfffffffc,-0x30(%ebp)
+   3660b:	8b 4d d0             	mov    -0x30(%ebp),%ecx
+   3660e:	01 d9                	add    %ebx,%ecx
+   36610:	39 d1                	cmp    %edx,%ecx
+   36612:	7d 54                	jge    36668 <_realloc_r+0x368>
+   36614:	89 c2                	mov    %eax,%edx
+   36616:	e9 8a fd ff ff       	jmp    363a5 <_realloc_r+0xa5>
+   3661b:	90                   	nop
+   3661c:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
+   36620:	8b 07                	mov    (%edi),%eax
+   36622:	83 fb 1b             	cmp    $0x1b,%ebx
+   36625:	89 01                	mov    %eax,(%ecx)
+   36627:	8b 47 04             	mov    0x4(%edi),%eax
+   3662a:	89 41 04             	mov    %eax,0x4(%ecx)
+   3662d:	0f 87 2d 01 00 00    	ja     36760 <_realloc_r+0x460>
+   36633:	8d 41 08             	lea    0x8(%ecx),%eax
+   36636:	8d 57 08             	lea    0x8(%edi),%edx
+   36639:	e9 f8 fe ff ff       	jmp    36536 <_realloc_r+0x236>
+   3663e:	89 5c 24 08          	mov    %ebx,0x8(%esp)
+   36642:	89 7c 24 04          	mov    %edi,0x4(%esp)
+   36646:	89 f7                	mov    %esi,%edi
+   36648:	89 34 24             	mov    %esi,(%esp)
+   3664b:	89 55 d8             	mov    %edx,-0x28(%ebp)
+   3664e:	89 4d e0             	mov    %ecx,-0x20(%ebp)
+   36651:	e8 8a fb ff ff       	call   361e0 <memmove>
+   36656:	8b 4d e0             	mov    -0x20(%ebp),%ecx
+   36659:	8b 55 d8             	mov    -0x28(%ebp),%edx
+   3665c:	8b 41 04             	mov    0x4(%ecx),%eax
+   3665f:	89 ce                	mov    %ecx,%esi
+   36661:	89 d3                	mov    %edx,%ebx
+   36663:	e9 fb fd ff ff       	jmp    36463 <_realloc_r+0x163>
+   36668:	8b 5d dc             	mov    -0x24(%ebp),%ebx
+   3666b:	29 d9                	sub    %ebx,%ecx
+   3666d:	01 de                	add    %ebx,%esi
+   3666f:	83 c9 01             	or     $0x1,%ecx
+   36672:	89 35 28 95 03 00    	mov    %esi,0x39528
+   36678:	89 4e 04             	mov    %ecx,0x4(%esi)
+   3667b:	8b 47 fc             	mov    -0x4(%edi),%eax
+   3667e:	83 e0 01             	and    $0x1,%eax
+   36681:	09 d8                	or     %ebx,%eax
+   36683:	89 47 fc             	mov    %eax,-0x4(%edi)
+   36686:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   36689:	89 04 24             	mov    %eax,(%esp)
+   3668c:	e8 0f d8 ff ff       	call   33ea0 <__malloc_unlock>
+   36691:	89 f8                	mov    %edi,%eax
+   36693:	e9 ef fd ff ff       	jmp    36487 <_realloc_r+0x187>
+   36698:	89 0c 24             	mov    %ecx,(%esp)
+   3669b:	89 5c 24 08          	mov    %ebx,0x8(%esp)
+   3669f:	89 7c 24 04          	mov    %edi,0x4(%esp)
+   366a3:	89 4d e0             	mov    %ecx,-0x20(%ebp)
+   366a6:	e8 35 fb ff ff       	call   361e0 <memmove>
+   366ab:	8b 4d e0             	mov    -0x20(%ebp),%ecx
+   366ae:	e9 93 fe ff ff       	jmp    36546 <_realloc_r+0x246>
+   366b3:	90                   	nop
+   366b4:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
+   366b8:	8d 14 18             	lea    (%eax,%ebx,1),%edx
+   366bb:	e9 d2 fe ff ff       	jmp    36592 <_realloc_r+0x292>
+   366c0:	8d 14 18             	lea    (%eax,%ebx,1),%edx
+   366c3:	8b 45 d0             	mov    -0x30(%ebp),%eax
+   366c6:	01 d0                	add    %edx,%eax
+   366c8:	89 45 d4             	mov    %eax,-0x2c(%ebp)
+   366cb:	8b 45 dc             	mov    -0x24(%ebp),%eax
+   366ce:	83 c0 10             	add    $0x10,%eax
+   366d1:	39 45 d4             	cmp    %eax,-0x2c(%ebp)
+   366d4:	0f 8c b8 fe ff ff    	jl     36592 <_realloc_r+0x292>
+   366da:	8b 41 0c             	mov    0xc(%ecx),%eax
+   366dd:	83 eb 04             	sub    $0x4,%ebx
+   366e0:	8b 51 08             	mov    0x8(%ecx),%edx
+   366e3:	83 fb 24             	cmp    $0x24,%ebx
+   366e6:	8d 71 08             	lea    0x8(%ecx),%esi
+   366e9:	89 42 0c             	mov    %eax,0xc(%edx)
+   366ec:	89 50 08             	mov    %edx,0x8(%eax)
+   366ef:	0f 87 3d 01 00 00    	ja     36832 <_realloc_r+0x532>
+   366f5:	83 fb 13             	cmp    $0x13,%ebx
+   366f8:	89 f0                	mov    %esi,%eax
+   366fa:	76 1a                	jbe    36716 <_realloc_r+0x416>
+   366fc:	8b 07                	mov    (%edi),%eax
+   366fe:	83 fb 1b             	cmp    $0x1b,%ebx
+   36701:	89 41 08             	mov    %eax,0x8(%ecx)
+   36704:	8b 47 04             	mov    0x4(%edi),%eax
+   36707:	89 41 0c             	mov    %eax,0xc(%ecx)
+   3670a:	0f 87 3d 01 00 00    	ja     3684d <_realloc_r+0x54d>
+   36710:	8d 41 10             	lea    0x10(%ecx),%eax
+   36713:	83 c7 08             	add    $0x8,%edi
+   36716:	8b 17                	mov    (%edi),%edx
+   36718:	89 10                	mov    %edx,(%eax)
+   3671a:	8b 57 04             	mov    0x4(%edi),%edx
+   3671d:	89 50 04             	mov    %edx,0x4(%eax)
+   36720:	8b 57 08             	mov    0x8(%edi),%edx
+   36723:	89 50 08             	mov    %edx,0x8(%eax)
+   36726:	8b 5d dc             	mov    -0x24(%ebp),%ebx
+   36729:	8b 7d d4             	mov    -0x2c(%ebp),%edi
+   3672c:	89 d8                	mov    %ebx,%eax
+   3672e:	29 df                	sub    %ebx,%edi
+   36730:	01 c8                	add    %ecx,%eax
+   36732:	83 cf 01             	or     $0x1,%edi
+   36735:	a3 28 95 03 00       	mov    %eax,0x39528
+   3673a:	89 78 04             	mov    %edi,0x4(%eax)
+   3673d:	8b 41 04             	mov    0x4(%ecx),%eax
+   36740:	83 e0 01             	and    $0x1,%eax
+   36743:	09 d8                	or     %ebx,%eax
+   36745:	89 41 04             	mov    %eax,0x4(%ecx)
+   36748:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   3674b:	89 04 24             	mov    %eax,(%esp)
+   3674e:	e8 4d d7 ff ff       	call   33ea0 <__malloc_unlock>
+   36753:	89 f0                	mov    %esi,%eax
+   36755:	e9 2d fd ff ff       	jmp    36487 <_realloc_r+0x187>
+   3675a:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi
+   36760:	8b 47 08             	mov    0x8(%edi),%eax
+   36763:	83 fb 24             	cmp    $0x24,%ebx
+   36766:	89 41 08             	mov    %eax,0x8(%ecx)
+   36769:	8b 47 0c             	mov    0xc(%edi),%eax
+   3676c:	89 41 0c             	mov    %eax,0xc(%ecx)
+   3676f:	74 60                	je     367d1 <_realloc_r+0x4d1>
+   36771:	8d 41 10             	lea    0x10(%ecx),%eax
+   36774:	8d 57 10             	lea    0x10(%edi),%edx
+   36777:	e9 ba fd ff ff       	jmp    36536 <_realloc_r+0x236>
+   3677c:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
+   36780:	8b 51 fc             	mov    -0x4(%ecx),%edx
+   36783:	83 e2 fc             	and    $0xfffffffc,%edx
+   36786:	01 d3                	add    %edx,%ebx
+   36788:	e9 d6 fc ff ff       	jmp    36463 <_realloc_r+0x163>
+   3678d:	8d 76 00             	lea    0x0(%esi),%esi
+   36790:	89 5c 24 08          	mov    %ebx,0x8(%esp)
+   36794:	89 7c 24 04          	mov    %edi,0x4(%esp)
+   36798:	89 f7                	mov    %esi,%edi
+   3679a:	89 34 24             	mov    %esi,(%esp)
+   3679d:	89 4d e0             	mov    %ecx,-0x20(%ebp)
+   367a0:	e8 3b fa ff ff       	call   361e0 <memmove>
+   367a5:	8b 4d e0             	mov    -0x20(%ebp),%ecx
+   367a8:	8b 5d d0             	mov    -0x30(%ebp),%ebx
+   367ab:	8b 41 04             	mov    0x4(%ecx),%eax
+   367ae:	89 ce                	mov    %ecx,%esi
+   367b0:	e9 ae fc ff ff       	jmp    36463 <_realloc_r+0x163>
+   367b5:	8b 47 08             	mov    0x8(%edi),%eax
+   367b8:	83 fb 24             	cmp    $0x24,%ebx
+   367bb:	89 41 10             	mov    %eax,0x10(%ecx)
+   367be:	8b 47 0c             	mov    0xc(%edi),%eax
+   367c1:	89 41 14             	mov    %eax,0x14(%ecx)
+   367c4:	74 3e                	je     36804 <_realloc_r+0x504>
+   367c6:	8d 41 18             	lea    0x18(%ecx),%eax
+   367c9:	83 c7 10             	add    $0x10,%edi
+   367cc:	e9 5b fc ff ff       	jmp    3642c <_realloc_r+0x12c>
+   367d1:	8b 47 10             	mov    0x10(%edi),%eax
+   367d4:	8d 57 18             	lea    0x18(%edi),%edx
+   367d7:	89 41 10             	mov    %eax,0x10(%ecx)
+   367da:	8b 5f 14             	mov    0x14(%edi),%ebx
+   367dd:	8d 41 18             	lea    0x18(%ecx),%eax
+   367e0:	89 59 14             	mov    %ebx,0x14(%ecx)
+   367e3:	e9 4e fd ff ff       	jmp    36536 <_realloc_r+0x236>
+   367e8:	8b 47 08             	mov    0x8(%edi),%eax
+   367eb:	83 fb 24             	cmp    $0x24,%ebx
+   367ee:	89 41 10             	mov    %eax,0x10(%ecx)
+   367f1:	8b 47 0c             	mov    0xc(%edi),%eax
+   367f4:	89 41 14             	mov    %eax,0x14(%ecx)
+   367f7:	74 22                	je     3681b <_realloc_r+0x51b>
+   367f9:	8d 41 18             	lea    0x18(%ecx),%eax
+   367fc:	83 c7 10             	add    $0x10,%edi
+   367ff:	e9 d3 fd ff ff       	jmp    365d7 <_realloc_r+0x2d7>
+   36804:	8b 47 10             	mov    0x10(%edi),%eax
+   36807:	83 c7 18             	add    $0x18,%edi
+   3680a:	89 41 18             	mov    %eax,0x18(%ecx)
+   3680d:	8b 57 fc             	mov    -0x4(%edi),%edx
+   36810:	8d 41 20             	lea    0x20(%ecx),%eax
+   36813:	89 51 1c             	mov    %edx,0x1c(%ecx)
+   36816:	e9 11 fc ff ff       	jmp    3642c <_realloc_r+0x12c>
+   3681b:	8b 47 10             	mov    0x10(%edi),%eax
+   3681e:	83 c7 18             	add    $0x18,%edi
+   36821:	89 41 18             	mov    %eax,0x18(%ecx)
+   36824:	8b 5f fc             	mov    -0x4(%edi),%ebx
+   36827:	8d 41 20             	lea    0x20(%ecx),%eax
+   3682a:	89 59 1c             	mov    %ebx,0x1c(%ecx)
+   3682d:	e9 a5 fd ff ff       	jmp    365d7 <_realloc_r+0x2d7>
+   36832:	89 5c 24 08          	mov    %ebx,0x8(%esp)
+   36836:	89 7c 24 04          	mov    %edi,0x4(%esp)
+   3683a:	89 34 24             	mov    %esi,(%esp)
+   3683d:	89 4d e0             	mov    %ecx,-0x20(%ebp)
+   36840:	e8 9b f9 ff ff       	call   361e0 <memmove>
+   36845:	8b 4d e0             	mov    -0x20(%ebp),%ecx
+   36848:	e9 d9 fe ff ff       	jmp    36726 <_realloc_r+0x426>
+   3684d:	8b 47 08             	mov    0x8(%edi),%eax
+   36850:	83 fb 24             	cmp    $0x24,%ebx
+   36853:	89 41 10             	mov    %eax,0x10(%ecx)
+   36856:	8b 47 0c             	mov    0xc(%edi),%eax
+   36859:	89 41 14             	mov    %eax,0x14(%ecx)
+   3685c:	74 1d                	je     3687b <_realloc_r+0x57b>
+   3685e:	8d 41 18             	lea    0x18(%ecx),%eax
+   36861:	83 c7 10             	add    $0x10,%edi
+   36864:	e9 ad fe ff ff       	jmp    36716 <_realloc_r+0x416>
+   36869:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+   3686c:	89 04 24             	mov    %eax,(%esp)
+   3686f:	e8 2c d6 ff ff       	call   33ea0 <__malloc_unlock>
+   36874:	31 c0                	xor    %eax,%eax
+   36876:	e9 0c fc ff ff       	jmp    36487 <_realloc_r+0x187>
+   3687b:	8b 47 10             	mov    0x10(%edi),%eax
+   3687e:	83 c7 18             	add    $0x18,%edi
+   36881:	89 41 18             	mov    %eax,0x18(%ecx)
+   36884:	8b 57 fc             	mov    -0x4(%edi),%edx
+   36887:	8d 41 20             	lea    0x20(%ecx),%eax
+   3688a:	89 51 1c             	mov    %edx,0x1c(%ecx)
+   3688d:	e9 84 fe ff ff       	jmp    36716 <_realloc_r+0x416>
+   36892:	66 90                	xchg   %ax,%ax
+   36894:	66 90                	xchg   %ax,%ax
+   36896:	66 90                	xchg   %ax,%ax
+   36898:	66 90                	xchg   %ax,%ax
+   3689a:	66 90                	xchg   %ax,%ax
+   3689c:	66 90                	xchg   %ax,%ax
+   3689e:	66 90                	xchg   %ax,%ax
+
+000368a0 <cleanup_glue>:
+   368a0:	55                   	push   %ebp
+   368a1:	89 e5                	mov    %esp,%ebp
+   368a3:	56                   	push   %esi
+   368a4:	53                   	push   %ebx
+   368a5:	83 ec 10             	sub    $0x10,%esp
+   368a8:	8b 5d 0c             	mov    0xc(%ebp),%ebx
+   368ab:	8b 75 08             	mov    0x8(%ebp),%esi
+   368ae:	8b 03                	mov    (%ebx),%eax
+   368b0:	85 c0                	test   %eax,%eax
+   368b2:	74 0c                	je     368c0 <cleanup_glue+0x20>
+   368b4:	89 44 24 04          	mov    %eax,0x4(%esp)
+   368b8:	89 34 24             	mov    %esi,(%esp)
+   368bb:	e8 e0 ff ff ff       	call   368a0 <cleanup_glue>
+   368c0:	89 5d 0c             	mov    %ebx,0xc(%ebp)
+   368c3:	89 75 08             	mov    %esi,0x8(%ebp)
+   368c6:	83 c4 10             	add    $0x10,%esp
+   368c9:	5b                   	pop    %ebx
+   368ca:	5e                   	pop    %esi
+   368cb:	5d                   	pop    %ebp
+   368cc:	e9 af f6 ff ff       	jmp    35f80 <_free_r>
+   368d1:	eb 0d                	jmp    368e0 <_reclaim_reent>
+   368d3:	90                   	nop
+   368d4:	90                   	nop
+   368d5:	90                   	nop
+   368d6:	90                   	nop
+   368d7:	90                   	nop
+   368d8:	90                   	nop
+   368d9:	90                   	nop
+   368da:	90                   	nop
+   368db:	90                   	nop
+   368dc:	90                   	nop
+   368dd:	90                   	nop
+   368de:	90                   	nop
+   368df:	90                   	nop
+
+000368e0 <_reclaim_reent>:
+   368e0:	55                   	push   %ebp
+   368e1:	89 e5                	mov    %esp,%ebp
+   368e3:	57                   	push   %edi
+   368e4:	56                   	push   %esi
+   368e5:	53                   	push   %ebx
+   368e6:	83 ec 1c             	sub    $0x1c,%esp
+   368e9:	8b 5d 08             	mov    0x8(%ebp),%ebx
+   368ec:	3b 1d 20 90 03 00    	cmp    0x39020,%ebx
+   368f2:	0f 84 a6 00 00 00    	je     3699e <_reclaim_reent+0xbe>
+   368f8:	8b 53 4c             	mov    0x4c(%ebx),%edx
+   368fb:	85 d2                	test   %edx,%edx
+   368fd:	74 46                	je     36945 <_reclaim_reent+0x65>
+   368ff:	31 c0                	xor    %eax,%eax
+   36901:	31 f6                	xor    %esi,%esi
+   36903:	90                   	nop
+   36904:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
+   36908:	8b 04 82             	mov    (%edx,%eax,4),%eax
+   3690b:	85 c0                	test   %eax,%eax
+   3690d:	75 0b                	jne    3691a <_reclaim_reent+0x3a>
+   3690f:	eb 1e                	jmp    3692f <_reclaim_reent+0x4f>
+   36911:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
+   36918:	89 f8                	mov    %edi,%eax
+   3691a:	8b 38                	mov    (%eax),%edi
+   3691c:	89 44 24 04          	mov    %eax,0x4(%esp)
+   36920:	89 1c 24             	mov    %ebx,(%esp)
+   36923:	e8 58 f6 ff ff       	call   35f80 <_free_r>
+   36928:	85 ff                	test   %edi,%edi
+   3692a:	75 ec                	jne    36918 <_reclaim_reent+0x38>
+   3692c:	8b 53 4c             	mov    0x4c(%ebx),%edx
+   3692f:	83 c6 01             	add    $0x1,%esi
+   36932:	83 fe 20             	cmp    $0x20,%esi
+   36935:	89 f0                	mov    %esi,%eax
+   36937:	75 cf                	jne    36908 <_reclaim_reent+0x28>
+   36939:	89 54 24 04          	mov    %edx,0x4(%esp)
+   3693d:	89 1c 24             	mov    %ebx,(%esp)
+   36940:	e8 3b f6 ff ff       	call   35f80 <_free_r>
+   36945:	8b 43 40             	mov    0x40(%ebx),%eax
+   36948:	85 c0                	test   %eax,%eax
+   3694a:	74 0c                	je     36958 <_reclaim_reent+0x78>
+   3694c:	89 44 24 04          	mov    %eax,0x4(%esp)
+   36950:	89 1c 24             	mov    %ebx,(%esp)
+   36953:	e8 28 f6 ff ff       	call   35f80 <_free_r>
+   36958:	8b 83 48 01 00 00    	mov    0x148(%ebx),%eax
+   3695e:	85 c0                	test   %eax,%eax
+   36960:	74 22                	je     36984 <_reclaim_reent+0xa4>
+   36962:	8d b3 4c 01 00 00    	lea    0x14c(%ebx),%esi
+   36968:	39 f0                	cmp    %esi,%eax
+   3696a:	75 06                	jne    36972 <_reclaim_reent+0x92>
+   3696c:	eb 16                	jmp    36984 <_reclaim_reent+0xa4>
+   3696e:	66 90                	xchg   %ax,%ax
+   36970:	89 f8                	mov    %edi,%eax
+   36972:	8b 38                	mov    (%eax),%edi
+   36974:	89 44 24 04          	mov    %eax,0x4(%esp)
+   36978:	89 1c 24             	mov    %ebx,(%esp)
+   3697b:	e8 00 f6 ff ff       	call   35f80 <_free_r>
+   36980:	39 fe                	cmp    %edi,%esi
+   36982:	75 ec                	jne    36970 <_reclaim_reent+0x90>
+   36984:	8b 43 54             	mov    0x54(%ebx),%eax
+   36987:	85 c0                	test   %eax,%eax
+   36989:	74 0c                	je     36997 <_reclaim_reent+0xb7>
+   3698b:	89 44 24 04          	mov    %eax,0x4(%esp)
+   3698f:	89 1c 24             	mov    %ebx,(%esp)
+   36992:	e8 e9 f5 ff ff       	call   35f80 <_free_r>
+   36997:	8b 43 38             	mov    0x38(%ebx),%eax
+   3699a:	85 c0                	test   %eax,%eax
+   3699c:	75 08                	jne    369a6 <_reclaim_reent+0xc6>
+   3699e:	83 c4 1c             	add    $0x1c,%esp
+   369a1:	5b                   	pop    %ebx
+   369a2:	5e                   	pop    %esi
+   369a3:	5f                   	pop    %edi
+   369a4:	5d                   	pop    %ebp
+   369a5:	c3                   	ret    
+   369a6:	89 1c 24             	mov    %ebx,(%esp)
+   369a9:	ff 53 3c             	call   *0x3c(%ebx)
+   369ac:	8b 83 e0 02 00 00    	mov    0x2e0(%ebx),%eax
+   369b2:	85 c0                	test   %eax,%eax
+   369b4:	74 e8                	je     3699e <_reclaim_reent+0xbe>
+   369b6:	89 1c 24             	mov    %ebx,(%esp)
+   369b9:	89 44 24 04          	mov    %eax,0x4(%esp)
+   369bd:	e8 de fe ff ff       	call   368a0 <cleanup_glue>
+   369c2:	83 c4 1c             	add    $0x1c,%esp
+   369c5:	5b                   	pop    %ebx
+   369c6:	5e                   	pop    %esi
+   369c7:	5f                   	pop    %edi
+   369c8:	5d                   	pop    %ebp
+   369c9:	c3                   	ret    

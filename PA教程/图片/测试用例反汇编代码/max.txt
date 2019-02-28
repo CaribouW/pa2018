@@ -1,0 +1,72 @@
+00030000 <start>:
+   30000:	e9 2b 00 00 00       	jmp    30030 <main>
+
+00030005 <max>:
+   30005:	55                   	push   %ebp
+   30006:	89 e5                	mov    %esp,%ebp
+   30008:	83 ec 10             	sub    $0x10,%esp
+   3000b:	e8 ab 00 00 00       	call   300bb <__x86.get_pc_thunk.ax>
+   30010:	05 f0 1f 00 00       	add    $0x1ff0,%eax
+   30015:	8b 45 08             	mov    0x8(%ebp),%eax
+   30018:	3b 45 0c             	cmp    0xc(%ebp),%eax
+   3001b:	7e 08                	jle    30025 <max+0x20>
+   3001d:	8b 45 08             	mov    0x8(%ebp),%eax
+   30020:	89 45 fc             	mov    %eax,-0x4(%ebp)
+   30023:	eb 06                	jmp    3002b <max+0x26>
+   30025:	8b 45 0c             	mov    0xc(%ebp),%eax
+   30028:	89 45 fc             	mov    %eax,-0x4(%ebp)
+   3002b:	8b 45 fc             	mov    -0x4(%ebp),%eax
+   3002e:	c9                   	leave  
+   3002f:	c3                   	ret    
+
+00030030 <main>:
+   30030:	55                   	push   %ebp
+   30031:	89 e5                	mov    %esp,%ebp
+   30033:	53                   	push   %ebx
+   30034:	83 ec 10             	sub    $0x10,%esp
+   30037:	e8 83 00 00 00       	call   300bf <__x86.get_pc_thunk.bx>
+   3003c:	81 c3 c4 1f 00 00    	add    $0x1fc4,%ebx
+   30042:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+   30049:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+   30050:	eb 51                	jmp    300a3 <main+0x73>
+   30052:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+   30059:	eb 3d                	jmp    30098 <main+0x68>
+   3005b:	8b 45 f4             	mov    -0xc(%ebp),%eax
+   3005e:	8b 94 83 20 00 00 00 	mov    0x20(%ebx,%eax,4),%edx
+   30065:	8b 45 f8             	mov    -0x8(%ebp),%eax
+   30068:	8b 84 83 20 00 00 00 	mov    0x20(%ebx,%eax,4),%eax
+   3006f:	52                   	push   %edx
+   30070:	50                   	push   %eax
+   30071:	e8 8f ff ff ff       	call   30005 <max>
+   30076:	83 c4 08             	add    $0x8,%esp
+   30079:	89 c1                	mov    %eax,%ecx
+   3007b:	8b 45 f0             	mov    -0x10(%ebp),%eax
+   3007e:	8d 50 01             	lea    0x1(%eax),%edx
+   30081:	89 55 f0             	mov    %edx,-0x10(%ebp)
+   30084:	8b 84 83 40 00 00 00 	mov    0x40(%ebx,%eax,4),%eax
+   3008b:	39 c1                	cmp    %eax,%ecx
+   3008d:	74 06                	je     30095 <main+0x65>
+   3008f:	b8 01 00 00 00       	mov    $0x1,%eax
+   30094:	82 ff 45             	cmp    $0x45,%bh
+   30097:	f4                   	hlt    
+   30098:	8b 45 f4             	mov    -0xc(%ebp),%eax
+   3009b:	83 f8 07             	cmp    $0x7,%eax
+   3009e:	76 bb                	jbe    3005b <main+0x2b>
+   300a0:	ff 45 f8             	incl   -0x8(%ebp)
+   300a3:	8b 45 f8             	mov    -0x8(%ebp),%eax
+   300a6:	83 f8 07             	cmp    $0x7,%eax
+   300a9:	76 a7                	jbe    30052 <main+0x22>
+   300ab:	b8 00 00 00 00       	mov    $0x0,%eax
+   300b0:	82 b8 00 00 00 00 8b 	cmpb   $0x8b,0x0(%eax)
+   300b7:	5d                   	pop    %ebp
+   300b8:	fc                   	cld    
+   300b9:	c9                   	leave  
+   300ba:	c3                   	ret    
+
+000300bb <__x86.get_pc_thunk.ax>:
+   300bb:	8b 04 24             	mov    (%esp),%eax
+   300be:	c3                   	ret    
+
+000300bf <__x86.get_pc_thunk.bx>:
+   300bf:	8b 1c 24             	mov    (%esp),%ebx
+   300c2:	c3                   	ret    

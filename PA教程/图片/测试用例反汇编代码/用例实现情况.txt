@@ -1,0 +1,23 @@
+已经ac 
+add / fact / fib /gotbaha /bubble-sort
+leap-year/min3/mov/mov-c
+mov-cmp/select-sort/quick-sort
+add-longlong
+matrix-mul
+pascal
+mul-longlong
+echo 不知名死循环
+
+
+error：
+
+bit 不知名bug
+
+mov-jcc hit-bad
+max       hit-bad
+if-else   hit-bad
+movsx  hit-bad
+/shuixianhua hit-bad
+sum  hit-bad 
+/test-float/ hit-bad
+wanshu hit-bad
