@@ -2,6 +2,4 @@
 
 2018.10-2019.1
 
-算是成功地进行了一次计组的学习，并且实验全部AC
-
-挺开心的
+C simulation for the computer architecture
